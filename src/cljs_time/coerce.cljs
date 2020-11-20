@@ -28,6 +28,12 @@
   [millis]
   (some-> millis UtcDateTime.fromTimestamp))
 
+(defn from-epoch
+  "Returns a DateTime instance in the UTC time zone corresponding to the given
+  number of seconds after the Unix epoch."
+  [epoch]
+  (some-> epoch (* 1000) UtcDateTime.fromTimestamp))
+
 (defn from-string
   "Returns DateTime instance from string using formatters in cljs-time.format,
   returning first which parses"

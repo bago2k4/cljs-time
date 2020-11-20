@@ -5,7 +5,7 @@
     :refer [date-time date-midnight from-utc-time-zone plus hours
             local-date local-date-time]]
    [cljs-time.coerce :refer
-    [from-date from-long from-string to-date to-date-time to-epoch to-long
+    [from-date from-epoch from-long from-string to-date to-date-time to-epoch to-long
      to-string to-local-date to-local-date-time]]
    [cljs-time.local]
    [cljs-time.format :refer [instant->map]]
@@ -13,10 +13,13 @@
    [goog.date :as date]))
 
 (deftest test-from-date
-  (let [dt (from-long 893462400000)
+  (let [dt (from-epoch  893462400)
         d  (to-date dt)]
     (is (instance? js/Date d))
     (is (= dt (from-date d)))))
+
+(deftest test-from-epoch
+  (is (= (date-time 2020 11 20) (from-epoch 1605830400))))
 
 (deftest test-from-long
   (is (= (date-time 1998 4 25) (from-long 893462400000))))
